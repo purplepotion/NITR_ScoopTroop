@@ -45,7 +45,7 @@ export const login = (email, password) => async (dispatch) => {
 
     // LOGIN A USER HERE
     const { data } = await axios.post(
-      BASE_URL + '/api/users/login',
+      BASE_URL + '/hsp/doctor/login',
       { email, password },
       config
     );
@@ -76,7 +76,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const register =
-  (name, email, password, age, gender, medicalHistory) => async (dispatch) => {
+  (name, email, password, affiliation, specialization) => async (dispatch) => {
     try {
       dispatch({ type: USER_REGISTER_REQUEST });
 
@@ -87,8 +87,8 @@ export const register =
       };
 
       const { data } = await axios.post(
-        BASE_URL + '/api/users/register',
-        { name, email, password, age, gender, medicalHistory },
+        BASE_URL + '/hsp/doctor/register',
+        { name, email, password, affiliation, specialization },
         config
       );
 

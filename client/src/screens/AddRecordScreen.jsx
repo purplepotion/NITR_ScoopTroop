@@ -28,7 +28,11 @@ const AddRecordScreen = ({ history, match }) => {
   const { loading, error, userInfo } = userLogin;
 
   const recordCreate = useSelector((state) => state.recordCreate);
-  const { loading: loadingRecord, error: errorRecord, success: successRecord } = recordCreate;
+  const {
+    loading: loadingRecord,
+    error: errorRecord,
+    success: successRecord,
+  } = recordCreate;
 
   const patientCreateRecord = useSelector((state) => state.patientCreateRecord);
   const {
@@ -49,7 +53,14 @@ const AddRecordScreen = ({ history, match }) => {
       dispatch({ type: PATIENT_CREATE_RECORD_RESET });
       history.push(`/patients/details/${patientId}`);
     }
-  }, [dispatch, history, successRecord, successPatientRecord, patientId, userInfo]);
+  }, [
+    dispatch,
+    history,
+    successRecord,
+    successPatientRecord,
+    patientId,
+    userInfo,
+  ]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -64,7 +75,11 @@ const AddRecordScreen = ({ history, match }) => {
         },
       };
 
-      const { data } = await axios.post(BASE_URL + '/api/upload', files, config);
+      const { data } = await axios.post(
+        BASE_URL + '/api/upload',
+        files,
+        config
+      );
 
       setFile(data);
       setUploading(false);
@@ -76,20 +91,16 @@ const AddRecordScreen = ({ history, match }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log('Add a record!');
-    if (userInfo && userInfo.userType === 'patient') {
-      dispatch(
-        createRecord({
-          name,
-          doctor,
-          file,
-          category,
-          description,
-        })
-      );
-    } else if (userInfo && patientId) {
-      dispatch(createPatientRecord(patientId, { name, doctor, file, category, description }));
-    }
+
+    dispatch(
+      createRecord({
+        name,
+        doctor,
+        file,
+        category,
+        description,
+      })
+    );
   };
 
   return (
@@ -108,7 +119,9 @@ const AddRecordScreen = ({ history, match }) => {
         <h1>Add Record</h1>
         {(loadingRecord || loadingPatientRecord) && <Loader />}
         {(errorRecord || errorPatientRecord) && (
-          <Message variant='danger'>{errorRecord || errorPatientRecord}</Message>
+          <Message variant='danger'>
+            {errorRecord || errorPatientRecord}
+          </Message>
         )}
         {loading ? (
           <Loader />
@@ -147,7 +160,10 @@ const AddRecordScreen = ({ history, match }) => {
                   ></Form.Control>
                 </Col>
                 <Col className='d-flex align-items-center'>
-                  <Form.File id='image-file' onChange={uploadFileHandler}></Form.File>
+                  <Form.File
+                    id='image-file'
+                    onChange={uploadFileHandler}
+                  ></Form.File>
                 </Col>
               </Row>
 

@@ -9,7 +9,7 @@ import { addPatient } from '../actions/doctor.actions';
 import { PATIENT_ADD_RESET } from '../constants/doctor.constants';
 
 const AddPatientScreen = ({ history, match }) => {
-  const [email, setEmail] = useState('');
+  const [patientId, setPatientId] = useState('');
 
   const dispatch = useDispatch();
 
@@ -17,7 +17,11 @@ const AddPatientScreen = ({ history, match }) => {
   const { loading, error, userInfo } = userLogin;
 
   const patientAdd = useSelector((state) => state.patientAdd);
-  const { loading: loadingPatient, error: errorPatient, success: successPatient } = patientAdd;
+  const {
+    loading: loadingPatient,
+    error: errorPatient,
+    success: successPatient,
+  } = patientAdd;
 
   useEffect(() => {
     if (!userInfo || userInfo.userType === 'patient') {
@@ -37,12 +41,12 @@ const AddPatientScreen = ({ history, match }) => {
   const submitHandler = (event) => {
     event.preventDefault();
     console.log('Add a Patient!');
-    dispatch(addPatient(email));
+    dispatch(addPatient(patientId));
   };
 
   return (
     <Container>
-      <Link to='/profile/doctor' className='btn btn-light my-3'>
+      <Link to='/profile' className='btn btn-light my-3'>
         Go Back
       </Link>
       <FormContainer>
@@ -55,13 +59,13 @@ const AddPatientScreen = ({ history, match }) => {
           <Message variant='danger'>{error}</Message>
         ) : (
           <Form onSubmit={submitHandler}>
-            <Form.Group controlId='email'>
-              <Form.Label>Email</Form.Label>
+            <Form.Group controlId='patientId'>
+              <Form.Label>Patient Health ID</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Enter Patient Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder='Please Enter Patient Health ID'
+                value={patientId}
+                onChange={(e) => setPatientId(e.target.value)}
               ></Form.Control>
             </Form.Group>
             <Button type='submit' variant='primary'>

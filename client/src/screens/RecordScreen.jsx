@@ -25,7 +25,11 @@ const RecordScreen = ({ history, match }) => {
   const { userInfo } = userLogin;
 
   const myRecordDetails = useSelector((state) => state.myRecordDetails);
-  const { loading: loadingRecord, error: errorRecord, record } = myRecordDetails;
+  const {
+    loading: loadingRecord,
+    error: errorRecord,
+    record,
+  } = myRecordDetails;
 
   const attachmentAdd = useSelector((state) => state.attachmentAdd);
   const { success: successAttachment } = attachmentAdd;
@@ -43,7 +47,14 @@ const RecordScreen = ({ history, match }) => {
     } else {
       dispatch(getMyRecordDetails(recordId));
     }
-  }, [dispatch, history, userInfo, recordId, successRemoveAccess, successAttachment]);
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    recordId,
+    successRemoveAccess,
+    successAttachment,
+  ]);
 
   // useEffect(() => {}, [file]);
 
@@ -66,7 +77,11 @@ const RecordScreen = ({ history, match }) => {
         },
       };
 
-      const { data } = await axios.post(BASE_URL + '/api/upload', files, config);
+      const { data } = await axios.post(
+        BASE_URL + '/api/upload',
+        files,
+        config
+      );
 
       setNewAttachment(data);
       setUploading(false);
@@ -85,7 +100,7 @@ const RecordScreen = ({ history, match }) => {
 
   return (
     <>
-      <Link to='/profile/doctor' className='btn btn-light my-3'>
+      <Link to='/profile' className='btn btn-light my-3'>
         Go Back
       </Link>
       <Row>
@@ -138,7 +153,9 @@ const RecordScreen = ({ history, match }) => {
         <Col>
           <h2>Record Access Details</h2>
           {/* {message && <Message variant='danger'>{message}</Message>} */}
-          {errorRemoveAccess && <Message variant='danger'>{errorRemoveAccess}</Message>}
+          {errorRemoveAccess && (
+            <Message variant='danger'>{errorRemoveAccess}</Message>
+          )}
           {/* {success && <Message variant='success'>Profile Updated!</Message>} */}
           {loadingRemoveAccess && <Loader />}
           <Card style={{ padding: '1rem' }}>
@@ -163,7 +180,9 @@ const RecordScreen = ({ history, match }) => {
                         <Button
                           variant='danger'
                           className='btn-sm'
-                          onClick={() => removeAccessHandler(record.id, healthOfficial.id)}
+                          onClick={() =>
+                            removeAccessHandler(record.id, healthOfficial.id)
+                          }
                         >
                           Remove
                         </Button>
@@ -183,7 +202,14 @@ const RecordScreen = ({ history, match }) => {
           record.attachments.map((attachment, index) => {
             const fileName = BASE_URL + `/api/files/${attachment}`;
             const fileType = attachment.split('.')[2];
-            return <ViewFile key={index} file={fileName} fileType={fileType} id={attachment} />;
+            return (
+              <ViewFile
+                key={index}
+                file={fileName}
+                fileType={fileType}
+                id={attachment}
+              />
+            );
           })}
       </div>
 
@@ -203,7 +229,10 @@ const RecordScreen = ({ history, match }) => {
                   ></Form.Control>
                 </Col>
                 <Col className='d-flex align-items-center'>
-                  <Form.File id='image-file' onChange={uploadFileHandler}></Form.File>
+                  <Form.File
+                    id='image-file'
+                    onChange={uploadFileHandler}
+                  ></Form.File>
                 </Col>
               </Row>
 

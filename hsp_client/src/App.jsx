@@ -8,8 +8,8 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import AddRecordScreen from './screens/AddRecordScreen';
-// import AddPatientScreen from './screens/AddPatientScreen';
-// import PatientDetailsScreen from './screens/PatientDetailsScreen';
+import AddPatientScreen from './screens/AddPatientScreen';
+import PatientDetailsScreen from './screens/PatientDetailsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 // import DoctorScreen from './screens/DoctorScreen';
 import RecordDetailsScreen from './screens/RecordDetailsScreen';
@@ -39,13 +39,9 @@ const App = () => {
             component={ConsultationDetailsScreen}
           />
           <Route path='/records/details/:id' exact component={RecordScreen} />
-          {/* <Route path='/patients/add' exact component={AddPatientScreen} /> */}
-          {/* <Route path='/patients/details/:id' exact component={PatientDetailsScreen} /> */}
-          <Route
-            path='/patients/details/:pid/records/add'
-            exact
-            component={AddRecordScreen}
-          />
+          <Route path='/add/patient' exact component={AddPatientScreen} />
+          <Route path='/patient/:id' exact component={PatientDetailsScreen} />
+          <Route path='/patient/:pid/add' exact component={AddRecordScreen} />
           <Route
             path='/patients/details/:pid/records/details/:id'
             exact
