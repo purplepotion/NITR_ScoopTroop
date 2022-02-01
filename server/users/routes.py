@@ -114,7 +114,7 @@ def login():
                 "id": str(patient._id),
                 "age": patient["age"],
                 "gender": patient["gender"],
-                "medicalHistory": patient["medicalHistory"],
+                "medicalHistory": patient["history"],
                 "token": token.decode("utf-8"),
             }
         )
