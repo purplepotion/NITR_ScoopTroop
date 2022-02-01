@@ -51,7 +51,7 @@ const AddRecordScreen = ({ history, match }) => {
     }
     if (successPatientRecord) {
       dispatch({ type: PATIENT_CREATE_RECORD_RESET });
-      history.push(`/patients/details/${patientId}`);
+      history.push(`/patient/${patientId}`);
     }
   }, [
     dispatch,
