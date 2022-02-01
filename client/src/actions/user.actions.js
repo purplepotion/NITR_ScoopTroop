@@ -70,9 +70,6 @@ export const logout = () => async (dispatch) => {
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: PATIENT_LIST_RESET });
   dispatch({ type: PATIENT_DETAILS_RESET });
-  /*
-  dispatch({ type: USER_LIST_RESET });
-  */
 };
 
 export const register =
@@ -153,7 +150,6 @@ export const getNotifications = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(BASE_URL + `/api/notifications`, config);
-    console.log(data);
 
     dispatch({ type: USER_NOTIFICATIONS_SUCCESS, payload: data });
   } catch (error) {
@@ -206,7 +202,7 @@ export const doctorsSearch = (name) => async (dispatch, getState) => {
 };
 
 export const consentRequest =
-  (notificationId, isApproved) => async (dispatch, getState) => {
+  (notificationId, isApproved, securityCode) => async (dispatch, getState) => {
     try {
       dispatch({ type: USER_CONSENT_REQUEST });
 
@@ -223,7 +219,7 @@ export const consentRequest =
 
       const { data } = await axios.post(
         BASE_URL + `/api/notifications/${notificationId}`,
-        { isApproved },
+        { isApproved, secret: securityCode },
         config
       );
 
