@@ -143,6 +143,40 @@ const RecordScreen = ({ history, match }) => {
                   </td>
                   <td>{record.description}</td>
                 </tr>
+                {record.metadata && (
+                  <>
+                    <tr>
+                      <td>
+                        <strong>Patient Name</strong>
+                      </td>
+                      <td>{record.metadata[0]['PatientName']}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Gender</strong>
+                      </td>
+                      <td>{record.metadata[0]['Gender']}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Institution Name</strong>
+                      </td>
+                      <td>{record.metadata[0]['Institution Name']}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Physician</strong>
+                      </td>
+                      <td>{record.metadata[0]['Physician']}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Description</strong>
+                      </td>
+                      <td>{record.metadata[0]['Description']}</td>
+                    </tr>
+                  </>
+                )}
               </tbody>
             </Table>
           </Card>
