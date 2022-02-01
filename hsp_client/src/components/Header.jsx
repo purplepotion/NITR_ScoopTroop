@@ -26,7 +26,7 @@ const Header = () => {
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
-              <h3 className='icon'>HSP</h3>
+              <h3 className='icon'>Health Service Provider</h3>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />

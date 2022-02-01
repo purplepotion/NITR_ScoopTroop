@@ -147,7 +147,7 @@ const PatientDetailsScreen = ({ history, match }) => {
                         <td>
                           {record.isApproved ? (
                             <LinkContainer
-                              to={`/patients/details/${patientId}/records/details/${record.id}`}
+                              to={`/patient/${patient.id}/record/${record.id}`}
                             >
                               <Button variant='light' className='btn-sm'>
                                 Details
