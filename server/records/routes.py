@@ -79,9 +79,11 @@ def addRecord(_id):
         attachment = data["file"]
 
         ext = attachment.rsplit(".", 1)[1].lower()
+        new_attachment = attachment.rsplit(".", 1)[0].lower() + ".jpg"
         metadata = None
         if ext == "dcm":
-            attachment, metadata = dicom_handler(attachment)
+            metadata = dicom_handler(attachment)
+            attachment = new_attachment
 
         try:
             record = Record(
@@ -90,7 +92,7 @@ def addRecord(_id):
                 doctor=doctor,
                 description=description,
                 metadata=[metadata],
-                attachments=[attachment],
+                attachments=[new_attachment],
             )
             patient = Patient.objects(_id=ObjectId(_id)).first()
             patient.records.append(record)
@@ -119,6 +121,7 @@ def getSingleRecord(_id, rid):
                 rdict["doctor"] = record.doctor
                 rdict["description"] = record.description
                 rdict["attachments"] = record.attachments
+                rdict["metadata"] = record.metadata
                 rdict["doctors"] = []
 
                 for doctor in record.doctors:

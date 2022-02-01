@@ -44,10 +44,9 @@ def dicom_handler(attachement):
     resp["Physician"] = ds.PerformingPhysicianName
     resp["Description"] = ds.StudyDescription
 
-    new_attachment = attachement.rsplit(".", 1)[0].lower() + "." + "jpg"
-
+    name = attachement.rsplit(".", 1)[0].lower() + ".jpg"
     plt.ioff()
     plt.imshow(ds.pixel_array.mean(axis=0), cmap=plt.cm.bone)
-    plt.savefig(f"{Config.UPLOAD_FOLDER}/{new_attachment}", bbox_inches="tight")
+    plt.savefig(f"{Config.UPLOAD_FOLDER}/{name}", bbox_inches="tight")
 
-    return new_attachment, resp
+    return resp
