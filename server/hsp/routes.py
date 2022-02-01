@@ -193,6 +193,9 @@ def getPatientRecords(_id, pid):
                 "id": str(patient._id),
                 "name": patient.name,
                 "email": patient.email,
+                "age": patient.age,
+                "gender": patient.gender,
+                "medicalHistory": patient.medicalHistory,
                 "records": recordList,
             }
         ),
