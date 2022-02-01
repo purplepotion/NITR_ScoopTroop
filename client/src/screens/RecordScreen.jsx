@@ -143,7 +143,7 @@ const RecordScreen = ({ history, match }) => {
                   </td>
                   <td>{record.description}</td>
                 </tr>
-                {record.metadata && (
+                {record.metadata && record.metadata[0] && (
                   <>
                     <tr>
                       <td>
