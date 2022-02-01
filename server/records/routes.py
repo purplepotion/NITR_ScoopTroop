@@ -1,9 +1,10 @@
+from importlib.metadata import metadata
 import os
 import re
 import datetime
 from bson import ObjectId
 from server.config import Config
-from server.utils import token_required, allowed_file
+from server.utils import token_required, allowed_file, dicom_handler
 from server.models import (
     ConsultationData,
     ConsultationRequest,
@@ -76,12 +77,19 @@ def addRecord(_id):
         doctor = data["doctor"]
         description = data["description"]
         attachment = data["file"]
+
+        ext = attachment.rsplit(".", 1)[1].lower()
+        metadata = None
+        if ext == "dcm":
+            attachment, metadata = dicom_handler(attachment)
+
         try:
             record = Record(
                 name=name,
                 category=category,
                 doctor=doctor,
                 description=description,
+                metadata=[metadata],
                 attachments=[attachment],
             )
             patient = Patient.objects(_id=ObjectId(_id)).first()

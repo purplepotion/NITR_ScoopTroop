@@ -1,3 +1,4 @@
+from importlib.metadata import metadata
 from bson.objectid import ObjectId
 from mongoengine import Document, EmbeddedDocument, NULLIFY
 from mongoengine import (
@@ -30,6 +31,7 @@ class Record(EmbeddedDocument):
     description = StringField(required=True)
     doctors = ListField(ObjectIdField())
     attachments = ListField(StringField())
+    metadata = ListField()
     meta = {"collection": "record"}
 
 
