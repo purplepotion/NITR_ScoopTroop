@@ -98,6 +98,8 @@ def dlogin():
             {
                 "name": doctor["name"],
                 "email": doctor["email"],
+                "specialization": doctor["specialization"],
+                "affiliation": doctor["affiliation"],
                 "id": str(doctor._id),
                 "token": token.decode("utf-8"),
             }
