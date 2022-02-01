@@ -39,7 +39,7 @@ const RecordDetailsScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (record && !record.isApproved) {
-      history.push(`/patients/details/${patientId}`);
+      history.push(`/patient/${patientId}`);
     }
   }, [history, record, patientId]);
 

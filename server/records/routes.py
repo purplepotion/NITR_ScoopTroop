@@ -76,6 +76,7 @@ def addRecord(_id):
         doctor = data["doctor"]
         description = data["description"]
         attachment = data["file"]
+
         try:
             record = Record(
                 name=name,

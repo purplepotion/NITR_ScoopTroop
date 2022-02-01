@@ -84,7 +84,7 @@ def approveNotifs(_id, nid):
                     record.doctors.append(hid)
                     break
 
-        elif patient.secret != secret:
+        elif approved and patient.secret != secret:
             return jsonify({"message": "Invalid secret code. Please try again!"}), 401
 
         patient.save()
