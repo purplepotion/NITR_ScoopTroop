@@ -30,7 +30,13 @@ def signup():
     hashedpassword = generate_password_hash(data["password"])
 
     try:
-        doctor = Doctor(name=data["name"], email=data["email"], password=hashedpassword)
+        doctor = Doctor(
+            name=data["name"],
+            email=data["email"],
+            password=hashedpassword,
+            specialization=data["specialization"],
+            affiliation=data["affiliation"],
+        )
         doctor.save()
         _id = str(doctor._id)
 
@@ -46,6 +52,8 @@ def signup():
             {
                 "name": data["name"],
                 "email": data["email"],
+                "specialization": data["specialization"],
+                "affiliation": data["affiliation"],
                 "id": _id,
                 "token": token.decode("utf-8"),
             }
@@ -130,10 +138,10 @@ def doctor_profile(_id):
 @token_required
 def addPatient(_id):
     if request.method == "POST":
-        email = request.json["email"]
+        health_id = request.json["healthID"]
         try:
             doctor = Doctor.objects(_id=ObjectId(_id)).first()
-            patient = Patient.objects(email=email).first()
+            patient = Patient.objects(_id=ObjectId(health_id)).first()
 
             doctor.patients.append(patient._id)
             doctor.save()

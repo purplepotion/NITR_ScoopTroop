@@ -42,6 +42,9 @@ def register():
         patient = Patient(
             name=data["name"],
             email=data["email"],
+            age=data["age"],
+            gender=data["gender"],
+            history=data["medicalHistory"],
             password=hashedpassword,
             secret=secret,
         )
@@ -60,6 +63,9 @@ def register():
             {
                 "name": data["name"],
                 "email": data["email"],
+                "age": data["age"],
+                "gender": data["gender"],
+                "medicalHistory": data["medicalHistory"],
                 "id": _id,
                 "secret": secret,
                 "token": token.decode("utf-8"),

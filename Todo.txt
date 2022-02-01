@@ -1,0 +1,4 @@
+1. Update Patient Profile Card with newly introduced fields
+2. Add specialization and affiliation field in HSP doctor registration.
+3. Dicom image presentation feature: both backend and frontend.
+4. Notification approve feature with security code.
