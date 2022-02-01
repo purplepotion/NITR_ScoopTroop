@@ -35,7 +35,6 @@ export const listRecords = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(BASE_URL + `/api/users/records`, config);
-
     dispatch({
       type: RECORD_LIST_SUCCESS,
       payload: data,
@@ -44,7 +43,9 @@ export const listRecords = () => async (dispatch, getState) => {
     dispatch({
       type: RECORD_LIST_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -74,7 +75,9 @@ export const getRecordDetails = (pid, rid) => async (dispatch, getState) => {
     dispatch({
       type: RECORD_DETAILS_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -94,14 +97,19 @@ export const getMyRecordDetails = (recordId) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(BASE_URL + `/api/users/records/${recordId}`, config);
+    const { data } = await axios.get(
+      BASE_URL + `/api/users/records/${recordId}`,
+      config
+    );
 
     dispatch({ type: RECORD_MY_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: RECORD_MY_DETAILS_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -121,49 +129,58 @@ export const createRecord = (record) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(BASE_URL + `/api/users/records`, record, config);
+    const { data } = await axios.post(
+      BASE_URL + `/api/users/records`,
+      record,
+      config
+    );
 
     dispatch({ type: RECORD_CREATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: RECORD_CREATE_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-export const addAttachment = (recordId, attachment, patientId) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: RECORD_ADD_ATTACHMENT_REQUEST });
+export const addAttachment =
+  (recordId, attachment, patientId) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: RECORD_ADD_ATTACHMENT_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: userInfo.token,
-      },
-    };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: userInfo.token,
+        },
+      };
 
-    if (!patientId) {
-      patientId = 0;
+      if (!patientId) {
+        patientId = 0;
+      }
+
+      const { data } = await axios.put(
+        BASE_URL + `/api/users/records/${recordId}/add`,
+        { patientId, attachment },
+        config
+      );
+
+      dispatch({ type: RECORD_ADD_ATTACHMENT_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: RECORD_ADD_ATTACHMENT_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
     }
-
-    const { data } = await axios.put(
-      BASE_URL + `/api/users/records/${recordId}/add`,
-      { patientId, attachment },
-      config
-    );
-
-    dispatch({ type: RECORD_ADD_ATTACHMENT_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: RECORD_ADD_ATTACHMENT_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
-    });
-  }
-};
+  };

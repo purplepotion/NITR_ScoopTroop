@@ -56,7 +56,11 @@ const RecordDetailsScreen = ({ history, match }) => {
         },
       };
 
-      const { data } = await axios.post(BASE_URL + '/api/upload', files, config);
+      const { data } = await axios.post(
+        BASE_URL + '/api/upload',
+        files,
+        config
+      );
 
       setNewAttachment(data);
       setUploading(false);
@@ -75,7 +79,7 @@ const RecordDetailsScreen = ({ history, match }) => {
 
   return (
     <>
-      <Link to={`/patients/details/${patientId}`} className='btn btn-light my-3'>
+      <Link to={`/patient/${patientId}`} className='btn btn-light my-3'>
         Go Back
       </Link>
       <Row>
@@ -132,7 +136,9 @@ const RecordDetailsScreen = ({ history, match }) => {
           record.attachments.map((attachment) => {
             const fileName = BASE_URL + `/api/files/${attachment}`;
             const fileType = attachment.split('.')[2];
-            return <ViewFile file={fileName} fileType={fileType} id={attachment} />;
+            return (
+              <ViewFile file={fileName} fileType={fileType} id={attachment} />
+            );
           })}
       </div>
 
@@ -152,7 +158,10 @@ const RecordDetailsScreen = ({ history, match }) => {
                   ></Form.Control>
                 </Col>
                 <Col className='d-flex align-items-center'>
-                  <Form.File id='image-file' onChange={uploadFileHandler}></Form.File>
+                  <Form.File
+                    id='image-file'
+                    onChange={uploadFileHandler}
+                  ></Form.File>
                 </Col>
               </Row>
 

@@ -7,7 +7,10 @@ import { Button, Row, Col, Table, Container, Card } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-import { getPatientDetails, createPatientNotification } from '../actions/doctor.actions';
+import {
+  getPatientDetails,
+  createPatientNotification,
+} from '../actions/doctor.actions';
 import { PATIENT_CONSENT_RESET } from '../constants/doctor.constants';
 
 const PatientDetailsScreen = ({ history, match }) => {
@@ -20,7 +23,11 @@ const PatientDetailsScreen = ({ history, match }) => {
   const { userInfo } = userLogin;
 
   const patientDetails = useSelector((state) => state.patientDetails);
-  const { loading: loadingPatient, error: errorPatient, patient } = patientDetails;
+  const {
+    loading: loadingPatient,
+    error: errorPatient,
+    patient,
+  } = patientDetails;
 
   const patientConsent = useSelector((state) => state.patientConsent);
   const { error: errorConsent, success: successConsent } = patientConsent;
@@ -49,11 +56,11 @@ const PatientDetailsScreen = ({ history, match }) => {
 
   return (
     <Container>
-      <Link to='/profile/doctor' className='btn btn-light my-3'>
+      <Link to='/profile' className='btn btn-light my-3'>
         Go Back
       </Link>
       <Row>
-        <Col md={4}>
+        <Col md={4} className='p-0'>
           <h2>Patient Details</h2>
           {message && <Message variant='danger'>{message}</Message>}
           {errorPatient && <Message variant='danger'>{errorPatient}</Message>}
@@ -63,7 +70,7 @@ const PatientDetailsScreen = ({ history, match }) => {
               <tbody>
                 <tr>
                   <td>
-                    <strong>ID</strong>
+                    <strong>Health ID</strong>
                   </td>
                   <td>{patientId}</td>
                 </tr>
@@ -78,6 +85,24 @@ const PatientDetailsScreen = ({ history, match }) => {
                     <strong>Email</strong>
                   </td>
                   <td>{patient.email}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Age</strong>
+                  </td>
+                  <td>{patient.age}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Gender</strong>
+                  </td>
+                  <td>{patient.gender}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Medical History</strong>
+                  </td>
+                  <td>{patient.medicalHistory}</td>
                 </tr>
               </tbody>
             </Table>
@@ -95,8 +120,12 @@ const PatientDetailsScreen = ({ history, match }) => {
             <Message variant='danger'>{errorPatient}</Message>
           ) : (
             <>
-              {errorConsent && <Message variant='danger'>Consent Request Failed!</Message>}
-              {successConsent && <Message variant='success'>Consent Request Sent!</Message>}
+              {errorConsent && (
+                <Message variant='danger'>Consent Request Failed!</Message>
+              )}
+              {successConsent && (
+                <Message variant='success'>Consent Request Sent!</Message>
+              )}
               <Table striped bordered hover responsive className='table'>
                 <thead>
                   <tr>
@@ -128,7 +157,9 @@ const PatientDetailsScreen = ({ history, match }) => {
                             <Button
                               variant='light'
                               className='btn-sm'
-                              onClick={() => consentRequestHandler(patientId, record.id)}
+                              onClick={() =>
+                                consentRequestHandler(patientId, record.id)
+                              }
                             >
                               Request Consent
                             </Button>
@@ -140,7 +171,7 @@ const PatientDetailsScreen = ({ history, match }) => {
               </Table>
             </>
           )}
-          <LinkContainer to={`/patients/details/${patientId}/records/add`}>
+          <LinkContainer to={`/patient/${patientId}/add`}>
             <Button variant='primary' className='right'>
               Add New Record
             </Button>

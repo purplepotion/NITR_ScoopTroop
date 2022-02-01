@@ -42,7 +42,12 @@ export const listPatients = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(BASE_URL + `/api/healthOfficial/patients`, config);
+    const { data } = await axios.get(
+      BASE_URL +
+        `/hsp/doctor/patients
+`,
+      config
+    );
 
     dispatch({
       type: PATIENT_LIST_SUCCESS,
@@ -52,7 +57,9 @@ export const listPatients = () => async (dispatch, getState) => {
     dispatch({
       type: PATIENT_LIST_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -73,7 +80,7 @@ export const getPatientDetails = (patientId) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      BASE_URL + `/api/healthOfficial/patients/${patientId}`,
+      BASE_URL + `/hsp/doctor/patients/${patientId}`,
       config
     );
 
@@ -82,12 +89,14 @@ export const getPatientDetails = (patientId) => async (dispatch, getState) => {
     dispatch({
       type: PATIENT_DETAILS_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-export const addPatient = (patientEmail) => async (dispatch, getState) => {
+export const addPatient = (patientId) => async (dispatch, getState) => {
   try {
     dispatch({ type: PATIENT_ADD_REQUEST });
 
@@ -103,8 +112,8 @@ export const addPatient = (patientEmail) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      BASE_URL + `/api/healthOfficial/patients`,
-      { email: patientEmail },
+      BASE_URL + `/hsp/doctor/patients`,
+      { healthID: patientId },
       config
     );
 
@@ -113,72 +122,80 @@ export const addPatient = (patientEmail) => async (dispatch, getState) => {
     dispatch({
       type: PATIENT_ADD_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-export const createPatientRecord = (patientId, record) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: PATIENT_CREATE_RECORD_REQUEST });
+export const createPatientRecord =
+  (patientId, record) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: PATIENT_CREATE_RECORD_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: userInfo.token,
-      },
-    };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: userInfo.token,
+        },
+      };
 
-    const { data } = await axios.post(
-      BASE_URL + `/api/healthOfficial/patients/${patientId}/records`,
-      record,
-      config
-    );
+      const { data } = await axios.post(
+        BASE_URL + `/hsp/doctor/patients/${patientId}/records`,
+        record,
+        config
+      );
 
-    dispatch({ type: PATIENT_CREATE_RECORD_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: PATIENT_CREATE_RECORD_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
-    });
-  }
-};
+      dispatch({ type: PATIENT_CREATE_RECORD_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PATIENT_CREATE_RECORD_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
-export const createPatientNotification = (patientId, recordId) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: PATIENT_CONSENT_REQUEST });
+export const createPatientNotification =
+  (patientId, recordId) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: PATIENT_CONSENT_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: userInfo.token,
-      },
-    };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: userInfo.token,
+        },
+      };
 
-    const { data } = await axios.post(
-      BASE_URL + `/api/notifications`,
-      { patientId, recordId },
-      config
-    );
+      const { data } = await axios.post(
+        BASE_URL + `/api/notifications`,
+        { patientId, recordId },
+        config
+      );
 
-    dispatch({ type: PATIENT_CONSENT_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: PATIENT_CONSENT_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
-    });
-  }
-};
+      dispatch({ type: PATIENT_CONSENT_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PATIENT_CONSENT_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const getConsultations = () => async (dispatch, getState) => {
   try {
@@ -198,76 +215,90 @@ export const getConsultations = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(BASE_URL + `/api/healthOfficial/consultations/get`, config);
+    const { data } = await axios.get(
+      BASE_URL + `/api/healthOfficial/consultations/get`,
+      config
+    );
 
     dispatch({ type: CONSULTATIONS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: CONSULTATIONS_FAIL,
       payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-export const getConsultationDetails = (req_id) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: CONSULTATION_DETAILS_REQUEST });
+export const getConsultationDetails =
+  (req_id) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: CONSULTATION_DETAILS_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: userInfo.token,
-      },
-      params: {
-        req_id,
-      },
-    };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: userInfo.token,
+        },
+        params: {
+          req_id,
+        },
+      };
 
-    const { data } = await axios.get(BASE_URL + `/api/healthOfficial/consultations/get`, config);
+      const { data } = await axios.get(
+        BASE_URL + `/api/healthOfficial/consultations/get`,
+        config
+      );
 
-    dispatch({ type: CONSULTATION_DETAILS_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: CONSULTATION_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
-    });
-  }
-};
+      dispatch({ type: CONSULTATION_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: CONSULTATION_DETAILS_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
-export const approveConsultation = (req_id, p_id, isApproved) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: CONSULTATION_APPROVAL_REQUEST });
+export const approveConsultation =
+  (req_id, p_id, isApproved) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: CONSULTATION_APPROVAL_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: userInfo.token,
-      },
-    };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: userInfo.token,
+        },
+      };
 
-    const approved = isApproved ? 'True' : 'False';
-    const { data } = await axios.post(
-      BASE_URL + `/api/healthOfficial/consultations/delete`,
-      { req_id, p_id, approved },
-      config
-    );
+      const approved = isApproved ? 'True' : 'False';
+      const { data } = await axios.post(
+        BASE_URL + `/api/healthOfficial/consultations/delete`,
+        { req_id, p_id, approved },
+        config
+      );
 
-    dispatch({ type: CONSULTATION_APPROVAL_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: CONSULTATION_APPROVAL_FAIL,
-      payload:
-        error.response && error.response.data.message ? error.response.data.message : error.message,
-    });
-  }
-};
+      dispatch({ type: CONSULTATION_APPROVAL_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: CONSULTATION_APPROVAL_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

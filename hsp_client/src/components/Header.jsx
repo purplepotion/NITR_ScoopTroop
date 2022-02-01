@@ -16,11 +16,17 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='primary' variant='dark' collapseOnSelect expand='lg' className='p-2'>
+      <Navbar
+        bg='primary'
+        variant='dark'
+        collapseOnSelect
+        expand='lg'
+        className='p-2'
+      >
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
-              <h3 className='icon'>elixir</h3>
+              <h3 className='icon'>HSP</h3>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -37,7 +43,9 @@ const Header = () => {
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to='/login'>

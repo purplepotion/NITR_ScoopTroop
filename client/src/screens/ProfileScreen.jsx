@@ -68,7 +68,7 @@ const ProfileScreen = ({ history }) => {
   }, [dispatch, history, userInfo, user]);
 
   useEffect(() => {
-    if (user && userInfo && userInfo.userType === 'patient') {
+    if (userInfo) {
       dispatch(listRecords());
       dispatch(getNotifications());
     }
@@ -122,6 +122,24 @@ const ProfileScreen = ({ history }) => {
                     <strong>Email</strong>
                   </td>
                   <td>{userInfo.email}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Age</strong>
+                  </td>
+                  <td>{userInfo.age}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Gender</strong>
+                  </td>
+                  <td>{userInfo.gender}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Medical History</strong>
+                  </td>
+                  <td>{userInfo.medicalHistory}</td>
                 </tr>
               </tbody>
             </Table>
@@ -197,8 +215,8 @@ const ProfileScreen = ({ history }) => {
                       <Row className='align-items-center'>
                         <Col md={10}>
                           <p className='m-0'>
-                            <strong>{`Dr. ${notif.healthOfficial.name}`}</strong>{' '}
-                            has requested access to your record{' '}
+                            <strong>{`Dr. ${notif.doctor.name}`}</strong> has
+                            requested access to your record{' '}
                             <Link
                               to={`/records/details/${notif.record.id}`}
                               className='p-0 m-0'

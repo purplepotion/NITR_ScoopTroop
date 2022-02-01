@@ -153,6 +153,7 @@ export const getNotifications = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(BASE_URL + `/api/notifications`, config);
+    console.log(data);
 
     dispatch({ type: USER_NOTIFICATIONS_SUCCESS, payload: data });
   } catch (error) {
