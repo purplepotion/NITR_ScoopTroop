@@ -1,3 +1,4 @@
+from curses import meta
 from importlib.metadata import metadata
 import os
 import re
@@ -79,11 +80,14 @@ def addRecord(_id):
         attachment = data["file"]
 
         ext = attachment.rsplit(".", 1)[1].lower()
+        print(ext)
         new_attachment = attachment.rsplit(".", 1)[0].lower() + ".jpg"
         metadata = None
         if ext == "dcm":
             metadata = dicom_handler(attachment)
+            print(metadata)
             attachment = new_attachment
+            print(new_attachment)
 
         try:
             record = Record(
@@ -92,7 +96,7 @@ def addRecord(_id):
                 doctor=doctor,
                 description=description,
                 metadata=[metadata],
-                attachments=[new_attachment],
+                attachments=[attachment],
             )
             patient = Patient.objects(_id=ObjectId(_id)).first()
             patient.records.append(record)

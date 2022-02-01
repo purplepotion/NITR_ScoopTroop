@@ -4,7 +4,7 @@ import datetime
 from bson import ObjectId
 from server.config import Config
 from flask import request, jsonify, Blueprint
-from server.utils import token_required
+from server.utils import token_required, dicom_handler
 from server.models import Patient, Doctor, Record, PatientNotifications
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -236,12 +236,23 @@ def addPatientRecord(_id, pid):
     description = data["description"]
     attachment = data["file"]
 
+    ext = attachment.rsplit(".", 1)[1].lower()
+    print(ext)
+    new_attachment = attachment.rsplit(".", 1)[0].lower() + ".jpg"
+    metadata = None
+    if ext == "dcm":
+        metadata = dicom_handler(attachment)
+        print(metadata)
+        attachment = new_attachment
+        print(new_attachment)
+
     try:
         record = Record(
             name=name,
             category=category,
             doctor=doctor,
             description=description,
+            metadata=[metadata],
             attachments=[attachment],
         )
         patient = Patient.objects(_id=ObjectId(pid)).first()
