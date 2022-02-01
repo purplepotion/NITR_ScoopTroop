@@ -112,6 +112,9 @@ def login():
                 "name": patient["name"],
                 "email": patient["email"],
                 "id": str(patient._id),
+                "age": patient["age"],
+                "gender": patient["gender"],
+                "medicalHistory": patient["medicalHistory"],
                 "token": token.decode("utf-8"),
             }
         )
