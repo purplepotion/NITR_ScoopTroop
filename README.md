@@ -1,6 +1,9 @@
 # Elixir :chart_with_upwards_trend:
 ## Data Activation Platform and Health Repository 
 
+## 📍Elixir Web App: https://elixir-client-8a3e1.web.app
+## 📍HSP Web App: https://hsp-client.web.app
+
 ## History & Motivation :bulb:
 The recent advancements in Indian healthcare system which motivated us to develop **Elixir** are :   
 
@@ -32,16 +35,17 @@ Please insure that you have the following installed in your system.
     Python 3.6 or above
  
  1. :twisted_rightwards_arrows: Fork this repository and clone it to build a local copy of the application in your system.  
- 2. Inside the project directory, run `npm install` in your terminal to get all the required dependencies for the client.
- 3. Inside the client directory, run `npm install` again to configure the starter script and get other packages.
- 4. In the same directory, build a python virtual environment using venv, by running `python -m venv myvenv` in the terminal. Activate this virtual environment via `myvenv\Scripts\activate.bat` in the terminal.
+ 2. Inside the `/client` directory, run `npm install` in your terminal to get all the required dependencies for the client.
+ 3. Inside the `/hsp_client` directory, run `npm install` again to get all the required dependencies for hsp_client.
+ 4. In the same directory, build a python virtual environment using venv, by running `python -m venv myvenv` in the terminal. Activate this virtual environment via `source myvenv/bin/activate` in the terminal.
  5. Navigate inside the *server* directory and run `pip install -r requirements.txt` to install all the packages and dependencies inside the virtual environment.
  6. In the same directory, configure and add the environment variables (database URI & secret_key) by making a `.env` file.
  7. In the project directory, modify `app.py` to run in `DEBUG` mode.
- 8. Finally start the application :rocket: by opening two terminals, and run the following commands :  
+ 8. Finally start the application :rocket: by opening three terminals, and run the following commands :  
  
-        terminal 1: python app.py (make sure your virtual environment is activated) 
-        terminal 2: npm run client
+        terminal 1: python3 app.py (make sure your virtual environment is activated) 
+        terminal 2: npm start (inside /client)
+        terminal 3: npm start (inside /hsp_client)
 
 
 ## ScreenShots :camera_flash:
