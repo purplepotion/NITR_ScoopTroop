@@ -28,7 +28,7 @@ The recent advancements in Indian healthcare system which motivated us to develo
 ![Alt Text](https://github.com/purplepotion/Elixir/blob/dev/imgs/elixir%20(5).png)
 
 ## Build Instructions :building_construction:
-Please insure that you have the following installed in your system.   
+Please ensure that you have the following installed in your system.   
 **Requirements :memo:**
 
     Node.js & npm
