@@ -253,7 +253,7 @@ export const removeAccess =
 
       const { data } = await axios.put(
         BASE_URL + `/api/users/records/${recordId}`,
-        { healthOfficialId },
+        { doctorId: healthOfficialId },
         config
       );
 
