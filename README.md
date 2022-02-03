@@ -7,7 +7,7 @@
 ## History & Motivation :bulb:
 The recent advancements in Indian healthcare system which motivated us to develop **Elixir** are :   
 
- - :white_check_mark: After the overwhleming suceess of Unified Payments Interface, India has released a major roadmap under **Atal Digital Bharat Mission** which focuses on establishing an **:globe_with_meridians:Unified Health Interface:globe_with_meridians:** 
+ - :white_check_mark: After the overwhleming suceess of Unified Payments Interface, India has released a major roadmap under **Atal Digital Bharat Mission** which focuses on establishing a **:globe_with_meridians:Unified Health Interface:globe_with_meridians:** 
  - :white_check_mark: All **:ambulance:healthcare service providers:ambulance:** aren't connected through a single repository which doesn't help in interoperability.
  - :white_check_mark: Lack of features for end user which makes most of the virtual care provider platforms inclusive to only tech-savy individuals.
  - :white_check_mark: There's a **:rotating_light:major lapse in storage and transfer of patient medical records:rotating_light:**, most of the time causing loss of health records and leads to compromised diagnosis 
