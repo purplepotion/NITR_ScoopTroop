@@ -78,16 +78,7 @@ def addRecord(_id):
         doctor = data["doctor"]
         description = data["description"]
         attachment = data["file"]
-
-        ext = attachment.rsplit(".", 1)[1].lower()
-        print(ext)
-        new_attachment = attachment.rsplit(".", 1)[0].lower() + ".jpg"
         metadata = None
-        if ext == "dcm":
-            metadata = dicom_handler(attachment)
-            print(metadata)
-            attachment = new_attachment
-            print(new_attachment)
 
         try:
             record = Record(
