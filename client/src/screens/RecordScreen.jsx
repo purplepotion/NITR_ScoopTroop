@@ -204,8 +204,8 @@ const RecordScreen = ({ history, match }) => {
               </thead>
               <tbody>
                 {record &&
-                  record.healthOfficials &&
-                  record.healthOfficials.map((healthOfficial) => (
+                  record.doctors &&
+                  record.doctors.map((healthOfficial) => (
                     <tr key={healthOfficial.id}>
                       <td>{healthOfficial.id}</td>
                       <td>{healthOfficial.name}</td>
