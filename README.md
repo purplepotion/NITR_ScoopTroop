@@ -22,7 +22,7 @@ The recent advancements in Indian healthcare system which motivated us to develo
 - It also hosts a decentralized dashboard of verified physicians and other healthcare providers powered by **:stethoscope:Digi Doctor:stethoscope:**. 
 - The major goal of Elixir is to provide an **:sparkles:umbrella solution to make patient care more accessible:sparkles:** and to remove the heavy lifting of organizing, indexing, and structuring patient information to provide a complete view of the health of individual patients and entire patient populations in a **secure, compliant, and auditable manner.** 
 
-**:pushpin: Please go through the [release information](https://github.com/purplepotion/Elixir/releases/tag/v1.0.0) for more details on features**
+
 
 ## :recycle: Workflow and :art: Design
 ![Alt Text](https://github.com/purplepotion/Elixir/blob/dev/imgs/elixir%20(5).png)
